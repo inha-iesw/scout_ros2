@@ -48,10 +48,10 @@ public:
   void SetupSubscription()
   {
     // odometry publisher
-    odom_pub_ =
-        node_->create_publisher<nav_msgs::msg::Odometry>(odom_topic_name_, 50);
-    status_pub_ = node_->create_publisher<scout_msgs::msg::ScoutStatus>(
-        "/scout_status", 10);
+    odom_pub_ = node_->create_publisher<nav_msgs::msg::Odometry>(odom_topic_name_, 50);
+
+    auto qos = rclcpp::QoS(10).best_effort().durability_volatile();
+    status_pub_ = node_->create_publisher<scout_msgs::msg::ScoutStatus>("/scout_status", qos);
 
     // cmd subscriber
     motion_cmd_sub_ = node_->create_subscription<geometry_msgs::msg::Twist>(
@@ -123,7 +123,7 @@ public:
     status_pub_->publish(status_msg);
 
     // publish odometry and tf
-    PublishOdometryToROS(state.motion_state, dt);
+    // PublishOdometryToROS(state.motion_state, dt);
 
     // record time for next integration
     last_time_ = current_time_;

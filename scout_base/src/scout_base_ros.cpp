@@ -222,7 +222,7 @@ void ScoutBaseRos::Run()
 
     // publish robot state at 50Hz while listening to twist commands
     messenger->SetupSubscription();
-    rclcpp::Rate rate(50);
+    rclcpp::Rate rate(100);
     keep_running_ = true;
     while (keep_running_)
     {
