@@ -12,21 +12,22 @@
 
 #include <atomic>
 #include <memory>
-
 #include <rclcpp/rclcpp.hpp>
 
 #include "ugv_sdk/mobile_robot/scout_robot.hpp"
 
-namespace westonrobot {
-class ScoutBaseRos : public rclcpp::Node {
- public:
+namespace westonrobot
+{
+class ScoutBaseRos : public rclcpp::Node
+{
+public:
   ScoutBaseRos(std::string node_name);
 
   bool Initialize();
   void Run();
   void Stop();
 
- private:
+private:
   std::string port_name_;
   std::string odom_frame_;
   std::string base_frame_;
